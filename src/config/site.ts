@@ -16,10 +16,9 @@ export const site = {
   // Google Search Console の所有権確認コード（HTMLタグ方式）。
   // Search Console の「HTMLタグ」に表示される content="..." の値だけをここに貼る。
   googleSiteVerification: "",
-  // Google アナリティクス(GA4) の測定ID（例: "G-XXXXXXXXXX"）。
-  // 設定すると全ページにアクセス計測タグが入る。空なら計測なし。
-  // ※遺品整理サイトとは別プロパティを作成して設定すること。
-  gaId: "",
+  // Google アナリティクス(GA4) の測定ID。
+  // プロパティ「かながわ葬儀ガイド」（アカウント: 九星気学 方位占い）のウェブストリーム。
+  gaId: "G-EBRBR62SLC",
   // 公開URL（astro.config.mjs の site と揃える）
   url: "https://sougi-kanagawa.wrapupmylife.workers.dev",
   // 対応エリア（記事・比較表の絞り込みやSEOの軸に使う）
