@@ -15,7 +15,7 @@ export const site = {
   locale: "ja_JP",
   // Google Search Console の所有権確認コード（HTMLタグ方式）。
   // Search Console の「HTMLタグ」に表示される content="..." の値だけをここに貼る。
-  googleSiteVerification: "qOZ5d2KDBpaAS8",
+  googleSiteVerification: "qOZ5d2KDBpaAS8WKRkuqIQJ7nqp2HieWdO0oFkxQaBs",
   // Google アナリティクス(GA4) の測定ID。
   // プロパティ「かながわ葬儀ガイド」（アカウント: 九星気学 方位占い）のウェブストリーム。
   gaId: "G-EBRBR62SLC",
