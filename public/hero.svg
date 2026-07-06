@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" preserveAspectRatio="xMidYMid slice" role="img" aria-label="静かな山並みと式場のある風景">
+  <!-- 生成りの空 -->
+  <rect width="960" height="520" fill="#eae4d8"/>
+  <!-- 遠景の山並み -->
+  <path d="M0 340 L200 280 L400 335 L620 270 L820 330 L960 285 L960 520 L0 520 Z" fill="#d8d0c0"/>
+  <!-- 近景の丘（藤紫がかった穏やかな色） -->
+  <path d="M0 420 L260 380 L480 425 L720 385 L960 425 L960 520 L0 520 Z" fill="#c5c2d4"/>
+  <!-- 静かな式場のシルエット -->
+  <g>
+    <rect x="600" y="310" width="150" height="105" fill="#a99a86"/>
+    <path d="M585 310 L675 255 L765 310 Z" fill="#5c4b80"/>
+    <rect x="660" y="355" width="30" height="60" fill="#15615e"/>
+    <rect x="620" y="340" width="22" height="26" fill="#f5f2ec"/>
+    <rect x="708" y="340" width="22" height="26" fill="#f5f2ec"/>
+  </g>
+  <!-- やわらかな月（見送りの静けさ） -->
+  <circle cx="840" cy="150" r="38" fill="#f3efe6" opacity=".85"/>
+</svg>

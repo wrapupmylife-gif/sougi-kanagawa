@@ -1,0 +1,97 @@
+---
+import { site, nav } from "../config/site";
+---
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">{site.name}</a>
+    <nav aria-label="メインナビゲーション">
+      <ul>
+        {nav.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- いますぐ帯（急ぎのご遺族向け導線・全ページ共通） -->
+<div class="urgent">
+  <div class="wrap urgent-in">
+    <span class="badge247">24時間365日</span>
+    <b>いますぐ葬儀社をお探しの方へ</b>
+    <span class="urgent-body">
+      深夜・早朝でもお迎え対応の葬儀社を<a href="/#compare">比較表</a>から。
+      まずの流れは<a href="/#flow">「もしもの時の流れ」</a>へ。
+    </span>
+  </div>
+</div>
+
+<style>
+  .urgent { background: var(--ai); color: #f0f5f4; }
+  .urgent-in {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px 14px;
+    flex-wrap: wrap;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    font-size: 0.88rem;
+  }
+  .urgent b { color: #fff; font-family: var(--font-serif); font-size: 0.96rem; }
+  .urgent a { color: #fff; font-weight: 700; text-underline-offset: 3px; }
+  .urgent a:hover { color: #d8e6e4; }
+  .badge247 {
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+    padding: 2px 12px;
+    font-size: 0.74rem;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+  @media (max-width: 640px) {
+    .urgent-body { display: block; width: 100%; text-align: center; }
+  }
+</style>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 64px;
+    flex-wrap: wrap;
+  }
+  .brand {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  nav ul {
+    display: flex;
+    gap: 18px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+  }
+  nav a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  nav a:hover { color: var(--ai); }
+</style>

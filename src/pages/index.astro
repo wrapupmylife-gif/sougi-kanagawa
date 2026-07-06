@@ -1,0 +1,377 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AdSlot from "../components/AdSlot.astro";
+import ComparisonTable from "../components/ComparisonTable.astro";
+import { site } from "../config/site";
+import { getPublishedArticles } from "../utils/posts";
+
+const latest = (await getPublishedArticles()).slice(0, 4);
+
+// 葬儀形式の4択ガイド（比較表への導線）
+const styles = [
+  {
+    ico: "🕊",
+    name: "直葬・火葬式",
+    price: "目安 10〜25万円",
+    desc: "通夜・告別式を行わず火葬のみ。ごく近親者で。",
+  },
+  {
+    ico: "🕯",
+    name: "一日葬",
+    price: "目安 30〜50万円",
+    desc: "通夜を省き告別式と火葬を1日で。負担を抑えて。",
+  },
+  {
+    ico: "🏠",
+    name: "家族葬",
+    price: "目安 40〜100万円",
+    desc: "家族・親族中心の少人数。いま最も選ばれる形式。",
+  },
+  {
+    ico: "🏛",
+    name: "一般葬",
+    price: "目安 100万円〜",
+    desc: "ご近所・職場など幅広く参列。従来型の葬儀。",
+  },
+];
+
+// もしもの時の流れ（ご逝去〜葬儀後）
+const flow = [
+  {
+    t: "お迎えの連絡",
+    b: "病院・施設から葬儀社へ搬送を依頼（24時間365日）。決めきれない時は搬送だけ先に頼めます。",
+  },
+  {
+    t: "ご安置・打ち合わせ",
+    b: "自宅または安置施設へ。形式・日程・費用を確認し、見積書をもらってから決めます。",
+  },
+  {
+    t: "通夜・葬儀・火葬",
+    b: "選んだ形式で執り行います。死亡届・火葬許可の手続きは多くの葬儀社が代行します。",
+  },
+  {
+    t: "お支払い・その後",
+    b: "葬儀後に精算。健康保険の葬祭費・埋葬料の申請や、相続・遺品整理へ進みます。",
+  },
+];
+
+// よくある質問（表示内容と構造化データを一致させる）
+const faqs = [
+  {
+    q: "葬儀費用の相場はどのくらいですか？",
+    a: "形式によって大きく変わります。目安として、直葬・火葬式が10〜25万円、一日葬が30〜50万円、家族葬が40〜100万円、一般葬が100万円以上です（プラン一式の目安）。このほか火葬料金・式場使用料・宗教者への謝礼・返礼品・料理などが別途かかる場合があるため、見積書の内訳確認が重要です。",
+  },
+  {
+    q: "病院で亡くなった場合、まず何をすればいいですか？",
+    a: "病院から搬送先（安置場所）を決めるよう求められます。葬儀社が決まっていなくても、搬送・安置だけを先に依頼し、形式や費用は落ち着いてから決めることができます。病院紹介の葬儀社に必ず依頼しなければならないわけではありません。",
+  },
+  {
+    q: "対応エリアはどこですか？",
+    a: "本サイトでは神奈川県を「横浜・川崎」「横須賀・三浦（三浦半島）」「湘南（鎌倉〜平塚）」「県央（厚木・海老名・伊勢原）」「西湘（大磯以西）」の5区分に分けて、エリアごとに葬儀社を比較できます。",
+  },
+  {
+    q: "比較表の掲載順はランキングですか？",
+    a: "いいえ。比較表の掲載順は葬儀社名の五十音順で、優劣やランキングを示すものではありません。有料掲載（広告）は「広告」「PR」と明示して、中立の編集情報と区別しています。",
+  },
+  {
+    q: "事前相談や生前見積は失礼にあたりませんか？",
+    a: "近年は事前相談が一般的になっており、多くの葬儀社が推奨しています。本人の希望を反映でき、費用の見通しが立ち、当日の判断の負担が減るという利点があります。早期申込の割引（早割）を設ける葬儀社もあります。",
+  },
+];
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+---
+
+<BaseLayout>
+  <!-- ヒーロー -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">{site.area}の葬儀社 比較・情報サイト</p>
+      <h1>「その時」は、突然に。<br />それでも、あわてず選べるように。</h1>
+      <p class="lead">
+        直葬・一日葬・家族葬・一般葬——形式ごとの費用の目安と対応内容を、
+        編集部がまとめた中立の一覧で見比べられます。
+        いま必要な方にも、これから備えたい方にも。
+      </p>
+      <div class="hero-actions">
+        <a class="btn" href="#compare">葬儀社を比較する</a>
+        <a class="btn btn--sei" href="#styles">どの形式が合う？を見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 新着記事のお知らせ（最新の公開記事を自動表示） -->
+  {latest[0] && (
+    <div class="wrap">
+      <a class="news-bar" href={`/articles/${latest[0].slug}/`}>
+        <span class="news-badge">新着記事</span>
+        <time class="news-date" datetime={latest[0].data.publishedAt}>
+          {latest[0].data.publishedAt.replaceAll("-", ".")}
+        </time>
+        <span class="news-title">{latest[0].data.title}</span>
+        <span class="news-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  )}
+
+  <!-- 葬儀形式の4択ガイド -->
+  <section id="styles" class="section wrap">
+    <p class="eyebrow">FIRST STEP</p>
+    <h2>どんなお葬式にする？　まずは形式から</h2>
+    <p class="muted intro">
+      迷ったらここから。参列者の人数とご予算で、およその形式が決まります。
+      詳しくは<a href="/articles/sougi-keishiki-erabikata/">形式の選び方の記事</a>もご覧ください。
+    </p>
+    <ul class="choices">
+      {styles.map((s) => (
+        <li>
+          <a href="#compare">
+            <span class="ico" aria-hidden="true">{s.ico}</span>
+            <span class="ttl">{s.name}</span>
+            <span class="prc">{s.price}</span>
+            <span class="sub">{s.desc}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- トップ広告枠（有料掲載・PR表記つき） -->
+  <div class="wrap">
+    <AdSlot slot="top" />
+  </div>
+
+  <!-- 比較表（中立の編集情報） -->
+  <section id="compare" class="section wrap">
+    <p class="eyebrow">COMPARE</p>
+    <h2>神奈川県の葬儀社比較</h2>
+    <p class="muted intro">
+      対応エリアを<strong>{site.regions.length}区分</strong>に分けて一覧にしました。お住まいの地域から比較できます。
+      掲載順は葬儀社名の五十音順で、ランキングや優劣を示すものではありません。
+      実際の料金・対応可否は各葬儀社にご確認ください。
+    </p>
+
+    <!-- エリア区分のショートカット -->
+    <ul class="area-nav">
+      {site.regions.map((r) => (
+        <li>
+          <a href={`#area-${r.id}`}>
+            <span class="area-nav__name">{r.name}</span>
+            <span class="area-nav__cities">{r.summary}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <ComparisonTable />
+  </section>
+
+  <!-- もしもの時の流れ -->
+  <section id="flow" class="section section--deep">
+    <div class="wrap">
+      <p class="eyebrow">HOW IT WORKS</p>
+      <h2>もしもの時の流れ（ご逝去からご葬儀まで）</h2>
+      <ol class="flow">
+        {flow.map((f) => (
+          <li>
+            <span class="ft">{f.t}</span>
+            <span class="fb">{f.b}</span>
+          </li>
+        ))}
+      </ol>
+      <p class="muted" style="margin-top:20px;">
+        時間に余裕のある方は、<a href="/articles/jizen-soudan-susumekata/">事前相談・生前見積</a>で
+        内容と費用を先に固めておくと、当日の負担が大きく減ります。
+      </p>
+    </div>
+  </section>
+
+  <!-- よくある質問（FAQ構造化データつき） -->
+  <section id="faq" class="section wrap">
+    <p class="eyebrow">FAQ</p>
+    <h2>よくある質問</h2>
+    <div class="faq">
+      {faqs.map((f) => (
+        <details class="faq-item">
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- 新着記事 -->
+  <section class="section section--deep">
+    <div class="wrap">
+      <p class="eyebrow">ARTICLES</p>
+      <h2>お葬式のヒント 〜費用・形式・その後の手続き〜</h2>
+      <ul class="cards">
+        {latest.map((a) => (
+          <li>
+            <a href={`/articles/${a.slug}/`}>
+              <span class="cat">{a.data.category}</span>
+              <span class="ttl">{a.data.title}</span>
+              <span class="muted">{a.data.description}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p style="margin-top:24px"><a href="/articles/">記事一覧を見る →</a></p>
+    </div>
+  </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative;
+    padding: 100px 0 96px;
+    background: var(--paper) url("/hero.svg") center center / cover no-repeat;
+    overflow: hidden;
+  }
+  /* 文字を読みやすくする淡いオーバーレイ（左ほど濃く、右のモチーフは見せる） */
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      95deg,
+      rgba(250, 247, 241, 0.93) 0%,
+      rgba(250, 247, 241, 0.8) 42%,
+      rgba(250, 247, 241, 0.45) 72%,
+      rgba(250, 247, 241, 0.2) 100%
+    );
+  }
+  .hero .wrap { position: relative; z-index: 1; }
+  .hero h1 { margin: 8px 0 18px; }
+  .lead { font-size: 1.05rem; color: var(--ink-soft); max-width: 38em; margin: 0 0 28px; }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn--sei { background: var(--sei); }
+  .btn--sei:hover { background: var(--ink); }
+  .intro { max-width: 44em; margin: 8px 0 28px; }
+
+  /* 新着記事バー */
+  .news-bar {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 18px; margin: 4px 0 8px;
+    background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+    text-decoration: none; transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .news-bar:hover { border-color: var(--sei); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+  .news-badge {
+    flex: none;
+    background: var(--sei); color: #fff;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em;
+    padding: 4px 10px; border-radius: 999px;
+  }
+  .news-date { flex: none; font-size: 0.82rem; color: var(--ink-soft); }
+  .news-title {
+    flex: 1 1 auto; min-width: 0;
+    color: var(--ink); font-weight: 700; font-size: 0.96rem;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .news-arrow { flex: none; color: var(--sei); font-weight: 700; }
+  @media (max-width: 560px) {
+    .news-bar { flex-wrap: wrap; gap: 8px 12px; }
+    .news-title { flex-basis: 100%; white-space: normal; }
+  }
+
+  /* 形式4択 */
+  .choices {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; gap: 14px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  .choices a {
+    display: block; height: 100%;
+    padding: 18px 18px 16px;
+    background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+    text-decoration: none;
+    transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+  }
+  .choices a:hover {
+    border-color: var(--sei);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+  }
+  .choices .ico { font-size: 1.5rem; }
+  .choices .ttl {
+    display: block; font-family: var(--font-serif); font-size: 1.08rem;
+    color: var(--ink); font-weight: 700; margin: 6px 0 4px;
+  }
+  .choices .prc { display: block; font-size: 0.82rem; color: var(--sei); font-weight: 700; margin-bottom: 2px; }
+  .choices .sub { display: block; font-size: 0.82rem; color: var(--ink-soft); }
+
+  .area-nav {
+    list-style: none; padding: 0; margin: 0 0 36px;
+    display: grid; gap: 14px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+  .area-nav a {
+    display: block; height: 100%;
+    padding: 16px 18px;
+    background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+    text-decoration: none; transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .area-nav a:hover { border-color: var(--sei); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+  .area-nav__name {
+    display: block; font-family: var(--font-serif); font-size: 1.1rem;
+    color: var(--ink); font-weight: 700;
+  }
+  .area-nav__cities { display: block; margin-top: 6px; font-size: 0.84rem; color: var(--ink-soft); }
+
+  /* もしもの時の流れ */
+  .flow {
+    counter-reset: step;
+    list-style: none; padding: 0; margin: 24px 0 0;
+    display: grid; gap: 18px 14px;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  }
+  .flow li {
+    position: relative;
+    background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 22px 18px 18px;
+  }
+  .flow li::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute; top: -14px; left: 18px;
+    width: 30px; height: 30px;
+    background: var(--sei); color: #fff;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: var(--font-serif); font-weight: 700;
+  }
+  .flow .ft { font-family: var(--font-serif); font-weight: 700; display: block; margin-bottom: 4px; }
+  .flow .fb { font-size: 0.85rem; color: var(--ink-soft); }
+
+  .faq { margin-top: 24px; border-top: 1px solid var(--line); }
+  .faq-item { border-bottom: 1px solid var(--line); }
+  .faq-item summary {
+    cursor: pointer; list-style: none;
+    padding: 18px 36px 18px 0; position: relative;
+    font-family: var(--font-serif); font-size: 1.08rem; color: var(--ink);
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: "＋"; position: absolute; right: 4px; top: 16px;
+    color: var(--sei); font-weight: 700;
+  }
+  .faq-item[open] summary::after { content: "−"; }
+  .faq-item p { margin: 0 0 18px; color: var(--ink-soft); font-size: 0.96rem; }
+
+  .cards { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  .cards li { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); }
+  .cards a { display: block; padding: 20px; text-decoration: none; }
+  .cat { font-size: 0.74rem; color: var(--sei); font-weight: 700; letter-spacing: 0.08em; }
+  .ttl { display: block; font-family: var(--font-serif); font-size: 1.08rem; color: var(--ink); margin: 6px 0 8px; line-height: 1.5; }
+</style>
