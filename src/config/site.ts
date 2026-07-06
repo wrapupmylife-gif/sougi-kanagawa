@@ -8,9 +8,8 @@ export const site = {
   // トップページ等のメタディスクリプション（検索結果に出る説明文）
   description:
     "神奈川県（横浜・川崎／三浦半島／湘南／県央／西湘）の葬儀社を、直葬・一日葬・家族葬の料金目安と対応内容で比較できる中立の情報サイト。もしもの時の流れ、費用の相場、事前相談の記事も掲載。",
-  // OGP画像（SNSシェア時のサムネ・1200x630）。public/ogp.png を指定。
-  // ※葬儀ガイド用の画像を作成したら "/ogp.png" に戻すこと。
-  ogImage: "",
+  // OGP画像（SNSシェア時のサムネ・1200x630）。public/ogp.png
+  ogImage: "/ogp.png",
   // OGP/HTMLのロケール
   locale: "ja_JP",
   // Google Search Console の所有権確認コード（HTMLタグ方式）。
