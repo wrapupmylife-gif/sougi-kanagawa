@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
 
-# サイトマップ（公開ドメインに合わせて自動生成されます）
-Sitemap: https://sougi-kanagawa.wrapupmylife.workers.dev/sitemap-index.xml
+# 本サイトは kanagawashukatsu.com/sougi/ のサブディレクトリで公開。
+# ルートの robots.txt はポータル（kanagawa-shukatsu リポジトリ）側で管理し、
+# このファイルは旧 workers.dev ドメイン用（クロール抑制）に残している。
+Sitemap: https://kanagawashukatsu.com/sougi/sitemap-index.xml

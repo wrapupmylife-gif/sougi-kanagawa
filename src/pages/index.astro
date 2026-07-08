@@ -111,7 +111,7 @@ const faqJsonLd = {
   <!-- 新着記事のお知らせ（最新の公開記事を自動表示） -->
   {latest[0] && (
     <div class="wrap">
-      <a class="news-bar" href={`/articles/${latest[0].slug}/`}>
+      <a class="news-bar" href={`/sougi/articles/${latest[0].slug}/`}>
         <span class="news-badge">新着記事</span>
         <time class="news-date" datetime={latest[0].data.publishedAt}>
           {latest[0].data.publishedAt.replaceAll("-", ".")}
@@ -128,7 +128,7 @@ const faqJsonLd = {
     <h2>どんなお葬式にする？　まずは形式から</h2>
     <p class="muted intro">
       迷ったらここから。参列者の人数とご予算で、およその形式が決まります。
-      詳しくは<a href="/articles/sougi-keishiki-erabikata/">形式の選び方の記事</a>もご覧ください。
+      詳しくは<a href="/sougi/articles/sougi-keishiki-erabikata/">形式の選び方の記事</a>もご覧ください。
     </p>
     <ul class="choices">
       {styles.map((s) => (
@@ -188,7 +188,7 @@ const faqJsonLd = {
         ))}
       </ol>
       <p class="muted" style="margin-top:20px;">
-        時間に余裕のある方は、<a href="/articles/jizen-soudan-susumekata/">事前相談・生前見積</a>で
+        時間に余裕のある方は、<a href="/sougi/articles/jizen-soudan-susumekata/">事前相談・生前見積</a>で
         内容と費用を先に固めておくと、当日の負担が大きく減ります。
       </p>
     </div>
@@ -216,7 +216,7 @@ const faqJsonLd = {
       <ul class="cards">
         {latest.map((a) => (
           <li>
-            <a href={`/articles/${a.slug}/`}>
+            <a href={`/sougi/articles/${a.slug}/`}>
               <span class="cat">{a.data.category}</span>
               <span class="ttl">{a.data.title}</span>
               <span class="muted">{a.data.description}</span>
@@ -224,7 +224,7 @@ const faqJsonLd = {
           </li>
         ))}
       </ul>
-      <p style="margin-top:24px"><a href="/articles/">記事一覧を見る →</a></p>
+      <p style="margin-top:24px"><a href="/sougi/articles/">記事一覧を見る →</a></p>
     </div>
   </section>
 
@@ -235,7 +235,7 @@ const faqJsonLd = {
   .hero {
     position: relative;
     padding: 100px 0 96px;
-    background: var(--paper) url("/hero.svg") center center / cover no-repeat;
+    background: var(--paper) url("/sougi/hero.svg") center center / cover no-repeat;
     overflow: hidden;
   }
   /* 文字を読みやすくする淡いオーバーレイ（左ほど濃く、右のモチーフは見せる） */

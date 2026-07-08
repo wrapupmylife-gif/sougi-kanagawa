@@ -9,7 +9,8 @@ export const site = {
   description:
     "神奈川県（横浜・川崎／三浦半島／湘南／県央／西湘）の葬儀社を、直葬・一日葬・家族葬の料金目安と対応内容で比較できる中立の情報サイト。もしもの時の流れ、費用の相場、事前相談の記事も掲載。",
   // OGP画像（SNSシェア時のサムネ・1200x630）。public/ogp.png
-  ogImage: "/ogp.png",
+  // ※サブディレクトリ公開のため base プレフィックス付きで指定。
+  ogImage: "/sougi/ogp.png",
   // OGP/HTMLのロケール
   locale: "ja_JP",
   // Google Search Console の所有権確認コード（HTMLタグ方式）。
@@ -18,8 +19,8 @@ export const site = {
   // Google アナリティクス(GA4) の測定ID。
   // プロパティ「かながわ葬儀ガイド」（アカウント: 九星気学 方位占い）のウェブストリーム。
   gaId: "G-EBRBR62SLC",
-  // 公開URL（astro.config.mjs の site と揃える）
-  url: "https://sougi-kanagawa.wrapupmylife.workers.dev",
+  // 公開URL（astro.config.mjs の site + base と揃える。末尾スラッシュなし）
+  url: "https://kanagawashukatsu.com/sougi",
   // 対応エリア（記事・比較表の絞り込みやSEOの軸に使う）
   area: "神奈川県",
   // 対応エリアは下記の区分に分けて扱う（比較表・導線の軸）。
@@ -67,11 +68,11 @@ export const site = {
   },
 } as const;
 
-// ナビゲーション
+// ナビゲーション（サブディレクトリ公開のため /sougi プレフィックス付き）
 export const nav = [
-  { label: "トップ", href: "/" },
-  { label: "葬儀社を比較", href: "/#compare" },
-  { label: "記事一覧", href: "/articles/" },
-  { label: "掲載をご希望の葬儀社へ", href: "/advertise/" },
-  { label: "運営者情報", href: "/about/" },
+  { label: "トップ", href: "/sougi/" },
+  { label: "葬儀社を比較", href: "/sougi/#compare" },
+  { label: "記事一覧", href: "/sougi/articles/" },
+  { label: "掲載をご希望の葬儀社へ", href: "/sougi/advertise/" },
+  { label: "運営者情報", href: "/sougi/about/" },
 ] as const;
