@@ -20,7 +20,7 @@ export const site = {
   // プロパティ「かながわ葬儀ガイド」（アカウント: 九星気学 方位占い）のウェブストリーム。
   gaId: "G-EBRBR62SLC",
   // 公開URL（astro.config.mjs の site + base と揃える。末尾スラッシュなし）
-  url: "https://kanagawa-shukatsu.com/sougi",
+  url: "https://kanagawashukatsu.com/sougi",
   // 対応エリア（記事・比較表の絞り込みやSEOの軸に使う）
   area: "神奈川県",
   // 対応エリアは下記の区分に分けて扱う（比較表・導線の軸）。
