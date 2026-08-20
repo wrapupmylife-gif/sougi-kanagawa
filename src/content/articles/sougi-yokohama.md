@@ -3,7 +3,7 @@ title: "横浜市の葬儀｜市営斎場の特徴と費用の目安"
 description: "横浜市で葬儀を行う前に知っておきたい、市営斎場（火葬場）の基礎知識、火葬の待ち日数、費用の目安、葬儀社選びのポイントをまとめました。"
 publishedAt: "2026-07-06"
 updatedAt: "2026-07-06"
-category: "葬儀"
+category: "エリア"
 area: "横浜市"
 author: "編集部"
 draft: false
